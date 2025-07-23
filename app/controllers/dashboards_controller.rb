@@ -1,8 +1,21 @@
 class DashboardsController < ApplicationController
-  def summary
-  product = Product.order(id: :desc).select(:id, :name, :price, :category_name)
-  render json: product
-  end
+ def summary
+  products = Product
+               .with_attached_image
+               .order(id: :desc)
+               .select(:id, :name, :price, :category_name)
+
+  render json: products.map { |product|
+    {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      category_name: product.category_name,
+      image_url: product.image.attached? ? url_for(product.image) : nil
+    }
+  }
+end
+ 
 
   def create
     Rails.logger.info("Params: #{params.to_unsafe_h}")
@@ -32,7 +45,7 @@ class DashboardsController < ApplicationController
   def product_params
     Rails.logger.debug("RAW PARAMS => #{params.inspect}")
 
-   params.require(:product).permit(:name , :price ,:category_name)
+   params.require(:product).permit(:name , :price ,:category_name,:image)
   end
 end
  
