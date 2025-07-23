@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+# config/routes.rb
+match '*path', via: [:options], to: lambda { |_| [204, {}, ['']] }
+
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
