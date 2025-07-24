@@ -8,6 +8,10 @@ gem "rails", "~> 7.2.2", ">= 7.2.2.1"
 gem "puma", ">= 5.0"
 gem 'psych', '~> 2.0', '>= 2.0.17'
 gem 'ruby_llm'
+# Gemfile
+gem 'pundit'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
