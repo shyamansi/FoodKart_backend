@@ -14,6 +14,16 @@ Rails.application.configure do
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local = false
+config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins 'http://13.202.199.94'
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :options, :delete, :put, :patch],
+      credentials: true
+  end
+end
 
   # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], config/master.key, or an environment
   # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
@@ -31,6 +41,8 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
+# Change this setting:
+config.consider_all_requests_local = true
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -42,7 +54,7 @@ Rails.application.configure do
   # config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+#  config.force_ssl = true
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
