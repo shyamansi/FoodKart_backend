@@ -45,6 +45,7 @@ class DashboardsController < ApplicationController
   end
 
   def destroy
+    @product = Product.find(params[:id])
     #authorize @product, :destroy?, policy_class: ProductPolicy if @product
     if @product
       @product.destroy
